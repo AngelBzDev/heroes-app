@@ -1,10 +1,15 @@
 import React from 'react'
-import HeroList from './HeroList'
+import { useParams } from 'react-router-dom'
+import getHeroById from '../../helpers/getHeroById'
 
 const HeroScreen = () => {
+   
+   const {heroId} = useParams()
+   const {superhero} = getHeroById(heroId)
+
    return (
       <div>
-         <h1>Hero</h1>
+         <h1 className='title-publisher'>{superhero}</h1>
       </div>
    )
 }
