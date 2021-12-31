@@ -7,8 +7,7 @@ const Navbar = () => {
 
    const navigate = useNavigate()
    const [width] = useState(window.visualViewport.width)
-
-   console.log(width)
+   const [showMenu, setShowMenu] = useState(false)
 
    const handleLogout = () => {
       navigate('/login', {
@@ -16,24 +15,32 @@ const Navbar = () => {
       })
    }
 
+   const handleShowMenu = () => setShowMenu(!showMenu)
+
    return (
       <nav className='navbar'>
-         <Link to="/" className='logo'>
-            Heroes-App
-         </Link>  
-         <div className={width > 768 ? `navbar__options` : `navbar__options oculta`}>
-            <NavLink to="/marvel" className={ ({isActive}) => isActive ? 'active' : ''}>Marvel</NavLink>
-            <NavLink to="/dc" className={ ({isActive}) => isActive ? 'active' : '' }>DC</NavLink>
+         <div className='logo__menu'>
+            <Link to="/" className='logo'>
+               Heroes-App
+            </Link>
+            {
+               width < 768 && (
+                  <button 
+                     className='btn-menu'
+                     onClick={handleShowMenu}
+                  >
+                     <HiOutlineMenuAlt1 value={{className: 'menu'}}/>
+                  </button>
+               )
+            }
          </div>
-         <div className={width > 768 ? `navbar__options` : `navbar__options oculta`}>
-            <span className='user'>Angel</span>
-            <button className='btn-logout' onClick={ handleLogout }>Logout</button>
-         </div>
-         {
-            width < 768 && (
-               <button className='btn-menu'> <HiOutlineMenuAlt1 value={{className: 'menu'}}/> </button>
-            )
-         }
+         <div className={`navbar_menu ${showMenu && 'oculta'}`}>
+            <div className={width > 768 ? `navbar__options` : `navbar__options`}>
+               <NavLink to="/marvel" className={ ({isActive}) => isActive ? 'active' : ''}>Marvel</NavLink>
+               <NavLink to="/dc" className={ ({isActive}) => isActive ? 'active' : '' }>DC</NavLink>         
+               <button className='btn-logout' onClick={ handleLogout }>Logout</button>
+            </div>
+         </div>         
       </nav>
    )
 }
