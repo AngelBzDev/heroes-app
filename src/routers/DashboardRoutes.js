@@ -16,6 +16,7 @@ const DashboardRoutes = () => {
                <Route path="marvel" element={ <MarvelScreen /> } />
                <Route path="dc" element={ <DcScreen /> } />
                <Route path="search" element={ <SearchScreen /> } />
+               {/* "hero/:heroId es un argumento obligatorio por lo tanto no se podria entrar ni si quiera a la ruta" */}
                <Route path="hero/:heroId" element={ <HeroScreen /> } />
                <Route path="/" element={ <MarvelScreen /> } />
             </Routes>
