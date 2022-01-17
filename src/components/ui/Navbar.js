@@ -1,22 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import { Link, NavLink, useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import {HiOutlineMenuAlt1} from 'react-icons/hi'
+import AuthContext from '../../auth/authContext'
+import { types } from '../../types/types'
 
 const Navbar = () => {
 
+   //Contexto
+   const {dispatch} = useContext(AuthContext)
+
+   //Navegacion
    const navigate = useNavigate()
-   const [width] = useState(window.visualViewport.width)
    const param = window.location.href
+
+   //Ocultar o mostrar menu
+   const [width] = useState(window.visualViewport.width)
    const [showMenu, setShowMenu] = useState(false)
+
 
    useEffect(() => {
       setShowMenu(false)
    }, [param])
 
    const handleLogout = () => {
+
+      dispatch({type: types.logout})
+
       navigate('/login', {
-         replace: true         
+         replace: true 
       })
    }
 
@@ -43,7 +55,7 @@ const Navbar = () => {
             <div className={width > 768 ? `navbar__options` : `navbar__options`}>
                <NavLink to="/marvel" className={ ({isActive}) => isActive ? 'active' : ''}>Marvel</NavLink>
                <NavLink to="/dc" className={ ({isActive}) => isActive ? 'active' : '' }>DC</NavLink> 
-               <NavLink to="/search" className={ ({isActive}) => isActive ? 'active' : '' }>Search</NavLink>       
+               <NavLink to="/search" className={ ({isActive}) => isActive ? 'active' : '' }>Search</NavLink>
                <button className='btn-logout' onClick={ handleLogout }>Logout</button>
             </div>
          </div>

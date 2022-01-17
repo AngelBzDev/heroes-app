@@ -81,6 +81,12 @@ a{
   align-items: center;
 }
 
+.msj{
+  margin: 3rem 0;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--secundary)
+}
 
 /* Layout */
 
@@ -298,7 +304,7 @@ a{
   background: var(--secundary);
   border: none;
   border-radius: 10px;
-  padding: .3rem 1rem;
+  padding: .5rem 1rem;
   font-size: 1.3rem;
   color: var(--yellow);
   font-weight: 600;

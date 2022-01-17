@@ -27,8 +27,8 @@ const HeroScreen = () => {
       <div className=''>
          <h1 className='title-publisher'>{hero.superhero}</h1>
          <div className='info__container'>
-            <img src={pathImg} alt={hero.superhero}/>
-            <div className='info__hero'>
+            <img src={pathImg} alt={hero.superhero} className='animate__animated animate__headShake'/>
+            <div className='info__hero animate__animated animate__headShake'>
                <p>Superhero: <span>{hero.superhero}</span></p>
                <p>Alter Ego: <span>{hero.alter_ego}</span></p>
                <p>First Appearance: <span>{hero.first_appearance}</span></p>

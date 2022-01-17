@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import useForm from '../../hooks/useForm'
@@ -8,6 +8,8 @@ import getHeroByName from '../../helpers/getHeroByName'
 import HeroCard from '../hero/HeroCard'
 //libreria que ayuda en el manejo de la ruta
 import queryString from 'query-string'
+
+import 'animate.css'
 
 
 const SearchScreen = () => {
@@ -27,7 +29,7 @@ const SearchScreen = () => {
 
    const { searchHero } = values
    
-   const heroesFilter = getHeroByName(searchHero)
+   const heroesFilter = useMemo(() => getHeroByName(hero), [hero]) 
 
    const handleSearch = (e) => {
       e.preventDefault()
@@ -49,7 +51,7 @@ const SearchScreen = () => {
                autoComplete='off' 
                className='search-bar'
                value={ searchHero }
-               onChange={ handleInputChange }
+               onChange={ handleInputChange }        
             />
             <button 
                type='submit' 
@@ -58,7 +60,13 @@ const SearchScreen = () => {
                Search
             </button>
          </form>
-         <div className='heroes-container'>
+            {
+               (hero === '')
+                  ? <p className='msj animate__animated animate__headShake'>Here is the results</p>
+                  : (heroesFilter.length === 0) && <p className='msj animate__animated animate__headShake'>No results found: { hero }</p>
+            }
+         <div className='heroes-container animate__animated animate__headShake'>
+
             {
                heroesFilter.map(hero => <HeroCard key={hero.superhero} {...hero}/>)
             }
